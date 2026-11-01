@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Pagination } from "~/components/Pagination";
 import { SearchBar } from "~/components/SearchBar";
 import { TrendingGrid } from "~/components/TrendingGrid";
 import { getTrendingMovies, searchMovies } from "~/lib/api";
@@ -24,15 +24,6 @@ export default async function HomePage({
   const movies = searchResponse
     ? searchResponse.results
     : await getTrendingMovies();
-
-  function getPageUrl(pageNumber: number) {
-    const params = new URLSearchParams({
-      query: searchQuery,
-      page: String(pageNumber),
-    });
-
-    return `/?${params.toString()}`;
-  }
 
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10">
@@ -64,40 +55,11 @@ export default async function HomePage({
         />
 
         {searchResponse && searchResponse.totalPages > 1 && (
-          <nav
-            aria-label="Search results pages"
-            className="flex items-center justify-center gap-4 pt-6"
-          >
-            {currentPage > 1 ? (
-              <Link
-                href={getPageUrl(currentPage - 1)}
-                className="rounded-md border border-border px-4 py-2 text-sm hover:bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
-              >
-                Previous
-              </Link>
-            ) : (
-              <span className="rounded-md border border-border px-4 py-2 text-sm opacity-50">
-                Previous
-              </span>
-            )}
-
-            <span className="text-sm text-muted">
-              Page {currentPage} of {searchResponse.totalPages}
-            </span>
-
-            {currentPage < searchResponse.totalPages ? (
-              <Link
-                href={getPageUrl(currentPage + 1)}
-                className="rounded-md border border-border px-4 py-2 text-sm hover:bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
-              >
-                Next
-              </Link>
-            ) : (
-              <span className="rounded-md border border-border px-4 py-2 text-sm opacity-50">
-                Next
-              </span>
-            )}
-          </nav>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={searchResponse.totalPages}
+            query={searchQuery}
+          />
         )}
       </section>
     </main>
