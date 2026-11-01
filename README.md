@@ -1,240 +1,183 @@
-# Movie Search — Frontend (Next.js)
+# Movie Search Frontend
 
-This is the frontend part of the DEPT Full-Stack Coding Challenge (Movie Search).
+A movie discovery and search application built with Next.js 16, React 19, TypeScript, and Tailwind CSS 4.
 
-The app uses Next.js 16 (App Router) and Tailwind CSS.
-It shows this week's trending movies, fetched from a backend API.
+The application provides trending movies, movie search, and server-driven pagination.
 
-You work **without the real backend**. Instead, you build a small mock API that follows the [API contract](#api-contract) below.
-A separate backend developer builds the real API against the same contract.
-When both are done, your app must work with the real API by changing only `NEXT_PUBLIC_API_BASE_URL`.
+## 1. Getting Started
 
-## Your tasks
+### Prerequisites
 
-### P0: core task (do this first)
+- Node.js (compatible with the project's Next.js version)
+- npm
 
-1. **Mock API**: build a mock that follows the [API contract](#api-contract).
-   See [Mock API requirements](#mock-api-requirements).
-2. **Search**: wire the search box (`components/SearchBar/`) to `GET /movies/search`.
-   Add a `searchMovies(query, page)` function in `lib/api.ts`.
-   Follow the same `apiFetch` pattern as `getTrendingMovies`.
-   Render the results with the existing `MovieCard` and `TrendingGrid` components.
-3. **Pagination**: add pagination UI driven by `page`, `totalPages` and `totalResults`.
-   Next/prev, page numbers or infinite scroll: your choice.
+### Installation
 
-### P1: expected once P0 works
-
-- **Loading, empty and error states** for search.
-  Handle them the same way as the trending section (see `app/loading.tsx` and `app/error.tsx`).
-  Use the slow and error cases of your mock to show that they work.
-- **Accessibility**: the app must work with a keyboard and a screen reader.
-  Form controls need labels. Focus states need to be visible.
-
-### P2: if you have time
-
-- A **movie detail page** (`/movies/[id]` or similar) that uses `GET /movies/{id}`.
-- Embed the **trailer** from YouTube, using `GET /movies/{id}/videos`.
-- Add both endpoints to your mock.
-
-### P3: stretch
-
-- TV/series search next to movies.
-- Caching or performance work on search (debouncing, revalidation).
-
-### Guidelines
-
-- Reuse the existing components and the Tailwind setup.
-- Do not add a new state-management or styling approach.
-  A mock API is allowed for this task. It is the only exception.
-- Do not change the contract. If you think it is wrong, explain why in your notes.
-- Be ready to explain your rendering strategy.
-  What is server-rendered, what is client-rendered, and why?
-
-## Using AI
-
-You may use AI tools. They are a normal part of the job here, so use them if that is how you work.
-We assess how you build the solution and how you reason about it.
-Make sure your submission shows your own judgment and understanding.
-Do not submit generated output that you have not reviewed.
-
-## Mock API requirements
-
-### Approach
-
-We suggest **Next.js route handlers**, because they need no new tools.
-For example, add routes under `app/api/mock/v1/movies/`.
-Then set this in `.env.local`:
+Clone the repository and install dependencies:
 
 ```bash
+npm install
+```
+
+Create a `.env.local` file in the project root and copy `.env.example` into it.
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### Available commands
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server |
+| `npm run lint` | Run ESLint |
+| `npx tsc --noEmit` | Run TypeScript validation |
+| `npm run build` | Create production build |
+
+## 2. Project Architecture
+
+The application separates UI rendering, API communication, mock implementation, and shared types.
+
+- **App layer:** Handles page rendering, URL search parameters, and route-level loading and error states.
+- **Components:** Provide reusable search, movie card, and movie grid UI.
+- **API client:** Centralizes HTTP requests and response/error handling.
+- **Mock API:** Implements local endpoints using fixed movie fixtures.
+- **Types:** Defines the shared movie and search response contracts.
+
+## 3. API Contract
+
+The frontend consumes two endpoints.
+
+### Trending movies
+
+`GET /movies/trending`
+
+Returns a list of movies using the shared `Movie` data structure.
+
+### Movie search
+
+`GET /movies/search?query=batman&page=1`
+
+| Parameter | Description |
+|---|---|
+| `query` | Required, non-empty search term |
+| `page` | Optional page number; defaults to 1 and must be between 1 and 500 |
+
+Search responses contain:
+
+```ts
+interface MovieSearchResponse {
+  page: number;
+  totalPages: number;
+  totalResults: number;
+  results: Movie[];
+}
+```
+
+The API owns pagination metadata. The frontend uses the returned values to render results and navigate between pages.
+
+API errors use the `application/problem+json` response format.
+
+## 4. Mock API
+
+The mock API is implemented using Next.js Route Handlers under:
+
+`app/api/mock/v1/movies/`
+
+It uses a fixed local movie fixture dataset and follows the expected API response structure. This allows frontend development and testing without depending on the availability of the actual backend.
+
+### Scenarios
+
+| Trigger | Behaviour | What it tests |
+|---|---|---|
+| `batman` | Returns matching movies | Normal search |
+| `a` | Returns 30 matching results across 3 pages | Pagination |
+| `noresults` | Returns HTTP 200 with an empty result list | Empty state |
+| `slow` | Delays the response by approximately 3 seconds | Loading state |
+| `error` | Returns HTTP 503 | API error handling |
+| Empty query | Returns HTTP 400 | Query validation |
+| `query=a&page=4` | Returns HTTP 400 | Page validation |
+
+The special values are reserved testing triggers within the mock implementation. They do not represent production search behaviour.
+
+### Why this approach?
+
+- Provides predictable responses for development.
+- Allows different API states to be tested without external dependencies.
+- Validates the frontend against the expected backend contract.
+- Keeps mock-specific logic isolated from the application UI.
+
+## 5. Rendering Strategy
+
+The application uses a combination of Next.js Server Components and Client Components.
+
+### Server Components
+
+The home page (`app/page.tsx`) is a Server Component.
+
+It reads the URL search parameters, requests trending movies or search results through the API client, and renders the response.
+
+### Client Components
+
+The search bar is a Client Component because it handles browser interactions and input changes.
+
+Search submission uses a native GET form, which updates the URL and allows the server-rendered page to fetch the corresponding results.
+
+### Loading and error states
+
+- `app/loading.tsx` provides loading feedback during route rendering.
+- `app/error.tsx` provides a route-level error fallback.
+- Empty search results are handled separately from API failures.
+
+## 6. Backend Integration
+
+The mock API and actual backend share the same intended API.
+
+The API base URL is configurable through:
+
+```env
 NEXT_PUBLIC_API_BASE_URL=http://localhost:3000/api/mock/v1
 ```
 
-You may choose another approach, such as MSW (Mock Service Worker) or json-server.
-If you do, explain why in your notes.
+When the .NET backend is available, update it to:
 
-### Rules
-
-- Return fixed JSON data (fixtures). Do not call TMDB from the mock.
-- Keep the mock separate from the app code, so it is easy to remove later.
-- The app code must not know it talks to a mock.
-  Only the base URL changes.
-
-### Cases the mock must cover
-
-| Endpoint | Case | How to trigger it (suggestion) |
-|---|---|---|
-| `GET /movies/trending` | Normal list | Always |
-| `GET /movies/search` | Results over several pages (at least 3) | Any normal query, for example `batman` |
-| `GET /movies/search` | No results | Query `noresults` |
-| `GET /movies/search` | Slow response (about 3 seconds) | Query `slow` |
-| `GET /movies/search` | Server error (`503`) | Query `error` |
-| `GET /movies/search` | Invalid request (`400`) | Empty `query`, or `page` out of range |
-| `GET /movies/{id}` (P2) | Movie found, and not found (`404`) | Known and unknown IDs |
-| `GET /movies/{id}/videos` (P2) | With a trailer, and with no videos | Different IDs |
-
-You may pick other trigger values. List them in your notes so reviewers can try each case.
-
-## API contract
-
-The frontend and backend are built separately. Both sides must follow this contract exactly.
-Do not change field names or shapes.
-
-- Base URL: `http://localhost:5080/api/v1`
-- Field names use camelCase.
-- Dates use the format `YYYY-MM-DD`.
-- Fields marked `| null` can be `null`.
-
-### Movie object
-
-All movie endpoints use this shape. It is the same shape the trending endpoint returns today.
-
-```json
-{
-  "id": 268,
-  "title": "Batman",
-  "overview": "Batman must face his most ruthless nemesis…",
-  "posterPath": "/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
-  "backdropPath": "/2va32apQP97gvUxaMnL5wYt4CRB.jpg",
-  "voteAverage": 7.2,
-  "releaseDate": "1989-06-21"
-}
+```env
+NEXT_PUBLIC_API_BASE_URL=http://localhost:5080/api/v1
 ```
 
-`overview`, `posterPath`, `backdropPath` and `releaseDate` are `string | null`.
+Restart the application after changing the environment variable.
 
-### `GET /movies/trending` (already built)
+The frontend expects the backend to provide:
 
-Returns an array of movie objects: `Movie[]`.
+- Matching endpoint paths.
+- Compatible movie response fields.
+- The same paginated search response structure.
+- Compatible validation and error response formats.
 
-### `GET /movies/search?query={query}&page={page}` (P0)
+The API client is responsible for HTTP communication, so the UI does not need to know whether its data comes from the mock or the actual backend.
 
-| Parameter | Required | Rules |
-|---|---|---|
-| `query` | yes | Not empty and not only spaces. |
-| `page` | no | Whole number from 1 to 500. Default is 1. |
+The current API requests are made from the Next.js server. Therefore, the backend must be reachable from the Next.js server; browser-side CORS configuration is not required for these server-to-server requests.
 
-Response `200 OK`:
 
-```json
-{
-  "page": 1,
-  "totalPages": 12,
-  "totalResults": 231,
-  "results": [ /* Movie objects, up to 20 per page */ ]
-}
-```
+## 7. Implementation Summary
 
-When nothing matches, the response is still `200 OK`.
-It has `"totalPages": 0`, `"totalResults": 0` and `"results": []`.
+### What I Prioritized
 
-### `GET /movies/{id}` (P2)
+The main focus was implementing the core movie search experience while maintaining the existing project architecture and centralized API communication.
 
-Response `200 OK`: a movie object with three extra fields.
+### What I Deferred
 
-```json
-{
-  "id": 268,
-  "title": "Batman",
-  "overview": "…",
-  "posterPath": "…",
-  "backdropPath": "…",
-  "voteAverage": 7.2,
-  "releaseDate": "1989-06-21",
-  "runtime": 126,
-  "tagline": "Have you ever danced with the devil in the pale moonlight?",
-  "genres": ["Fantasy", "Action", "Crime"]
-}
-```
+- **P2:** Movie detail pages and YouTube trailer integration were deferred to prioritize the core search and pagination requirements.
+- **P3:** TV/series search and additional performance optimizations were skipped because they were stretch enhancements rather than essential functionality.
 
-`runtime` is in minutes and is `number | null`. `tagline` is `string | null`.
-If the movie does not exist, the response is `404 Not Found`.
+### Rendering Strategy
+Retained the existing Next.js rendering architecture:
 
-### `GET /movies/{id}/videos` (P2)
+- **Server Component:** The home page fetches search data on the server and renders the results.
+- **Client Component:** The search bar handles browser-side input interactions and submits searches through a native GET form.
 
-Response `200 OK`: an array of videos. It is empty when the movie has no videos.
-
-```json
-[
-  {
-    "key": "dgC9Q0uhX70",
-    "name": "Official Trailer",
-    "site": "YouTube",
-    "type": "Trailer"
-  }
-]
-```
-
-The frontend embeds a YouTube video with `https://www.youtube.com/embed/{key}`.
-It only uses videos where `site` is `"YouTube"`.
-
-### Errors
-
-Every error uses the existing `application/problem+json` format:
-
-```json
-{
-  "type": "about:blank",
-  "title": "Invalid request",
-  "status": 400,
-  "detail": "The 'query' parameter is required."
-}
-```
-
-| Status | When |
-|---|---|
-| `400 Bad Request` | A parameter breaks the rules above. |
-| `404 Not Found` | The movie does not exist. |
-| `503 Service Unavailable` | TMDB is down or did not respond. |
-| `500 Internal Server Error` | Any other failure. |
-
-## Getting started
-
-You need Node 22+ and [pnpm](https://pnpm.io/installation).
-You do **not** need .NET or a TMDB token.
-
-```bash
-cp .env.example .env.local
-# the default already points at http://localhost:3000/api/mock/v1
-pnpm install
-pnpm dev
-```
-
-The app runs at `http://localhost:3000`.
-
-Until your mock serves `GET /movies/trending`, the home page shows the error screen.
-This is expected, because the page loads trending movies on every request.
-Build the trending mock first.
-
-## Checks
-
-```bash
-pnpm lint && pnpm typecheck && pnpm test
-```
-
-## Submitting
-
-Include a short note on:
-
-- What you prioritized and what you skipped, and why.
-- How you built the mock, and the trigger values for each case.
-- Your rendering strategy (server vs client rendering) and the reasons for it.
+This approach keeps data fetching on the server while limiting client-side JavaScript to interactive functionality.
