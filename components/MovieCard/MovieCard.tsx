@@ -18,14 +18,18 @@ const { base, posterWrapper, body, title, meta } = card();
 
 export interface MovieCardProps {
   movie: Movie;
+  returnTo: string;
 }
 
-export function MovieCard({ movie }: MovieCardProps) {
+export function MovieCard({ movie, returnTo }: MovieCardProps) {
   const year = movie.releaseDate ? movie.releaseDate.slice(0, 4) : null;
 
   return (
     <Link
-      href={`/movies/${movie.id}`}
+      href={{
+        pathname: `/movies/${movie.id}`,
+        query: { returnTo },
+      }}
       className="block rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-600"
     >
       <article className={base()}>

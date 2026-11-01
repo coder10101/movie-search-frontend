@@ -17,6 +17,10 @@ export default async function HomePage({
   const searchQuery = query?.trim() ?? "";
   const currentPage = Number(page ?? "1");
 
+  const returnTo = searchQuery
+    ? `/?query=${encodeURIComponent(searchQuery)}&page=${currentPage}`
+    : "/";
+
   const searchResponse = searchQuery
     ? await searchMovies(searchQuery, currentPage)
     : null;
@@ -52,6 +56,7 @@ export default async function HomePage({
               ? `No movies found for "${searchQuery}". Try another search.`
               : "No trending movies right now."
           }
+          returnTo={returnTo}
         />
 
         {searchResponse && searchResponse.totalPages > 1 && (

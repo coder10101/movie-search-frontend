@@ -6,8 +6,10 @@ import { ApiError, getMovieDetails, getMovieVideos } from "~/lib/api";
 
 export default async function MovieDetailsPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ returnTo?: string }>;
 }) {
   const { id } = await params;
   const movieId = Number(id);
@@ -38,10 +40,15 @@ export default async function MovieDetailsPage({
 
   const releaseYear = movie.releaseDate?.slice(0, 4);
 
+  const { returnTo } = await searchParams;
+
+  const backUrl =
+    returnTo?.startsWith("/") && !returnTo.startsWith("//") ? returnTo : "/";
+
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10">
       <Link
-        href="/"
+        href={backUrl}
         className="w-fit text-sm text-muted hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-600"
       >
         ← Back to movies
