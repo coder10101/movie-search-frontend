@@ -3,11 +3,19 @@ import type { Movie } from "~/types/movie";
 
 export interface TrendingGridProps {
   movies: Movie[];
+  emptyMessage?: string;
 }
 
-export function TrendingGrid({ movies }: TrendingGridProps) {
+export function TrendingGrid({
+  movies,
+  emptyMessage = "No trending movies right now.",
+}: TrendingGridProps) {
   if (movies.length === 0) {
-    return <p className="text-sm text-muted">No trending movies right now.</p>;
+    return (
+      <p className="py-8 text-center text-sm text-muted" role="status">
+        {emptyMessage}
+      </p>
+    );
   }
 
   return (

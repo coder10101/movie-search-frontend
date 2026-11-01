@@ -49,12 +49,19 @@ export default async function HomePage({
             ? `Search results for "${searchQuery}"`
             : "Trending this week"}
         </h2>
-        {searchResponse && (
+        {searchResponse && searchResponse.totalResults > 0 && (
           <p className="text-sm text-muted">
             {searchResponse.totalResults} movies found
           </p>
         )}
-        <TrendingGrid movies={movies} />
+        <TrendingGrid
+          movies={movies}
+          emptyMessage={
+            searchQuery
+              ? `No movies found for "${searchQuery}". Try another search.`
+              : "No trending movies right now."
+          }
+        />
 
         {searchResponse && searchResponse.totalPages > 1 && (
           <nav
