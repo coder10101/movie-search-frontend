@@ -7,3 +7,10 @@ export interface Movie {
   voteAverage: number;
   releaseDate: string | null;
 }
+
+export interface MovieSearchResponse {
+  page: number;
+  totalPages: number;
+  totalResults: number;
+  results: Movie[];
+}
