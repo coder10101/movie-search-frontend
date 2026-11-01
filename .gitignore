@@ -10,3 +10,5 @@ coverage/
 .cache/
 *.tsbuildinfo
 next-env.d.ts
+# Local source dataset
+9000plus.csv
