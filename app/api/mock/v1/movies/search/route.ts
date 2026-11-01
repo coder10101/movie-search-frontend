@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   const query = searchParams.get("query")?.trim() ?? "";
   const page = Number(searchParams.get("page") ?? "1");
 
-  if (!query || !Number.isInteger(page) || page < 1) {
+  if (!query || !Number.isInteger(page) || page < 1 || page > 500) {
     return Response.json(
       {
         type: "about:blank",
