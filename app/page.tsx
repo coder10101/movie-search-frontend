@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export default async function HomePage({
   searchParams,
 }: {
-  searchParams: { query?: string; page?: string };
+  searchParams: Promise<{ query?: string; page?: string }>;
 }) {
   const { query, page } = await searchParams;
   const searchQuery = query?.trim() ?? "";
@@ -71,7 +71,7 @@ export default async function HomePage({
             {currentPage > 1 ? (
               <Link
                 href={getPageUrl(currentPage - 1)}
-                className="rounded-md border border-border px-4 py-2 text-sm hover:bg-surface"
+                className="rounded-md border border-border px-4 py-2 text-sm hover:bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
               >
                 Previous
               </Link>
@@ -88,7 +88,7 @@ export default async function HomePage({
             {currentPage < searchResponse.totalPages ? (
               <Link
                 href={getPageUrl(currentPage + 1)}
-                className="rounded-md border border-border px-4 py-2 text-sm hover:bg-surface"
+                className="rounded-md border border-border px-4 py-2 text-sm hover:bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
               >
                 Next
               </Link>

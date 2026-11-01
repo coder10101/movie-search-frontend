@@ -47,7 +47,7 @@ export function searchMovies(
   page: number,
 ): Promise<MovieSearchResponse> {
   return apiFetch<MovieSearchResponse>(
-    `/movies/search/?query=${encodeURIComponent(query)}&page=${page}`,
+    `/movies/search?query=${encodeURIComponent(query)}&page=${page}`,
     { cache: "no-store" },
   );
 }
