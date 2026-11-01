@@ -1,6 +1,6 @@
 import "server-only";
 
-import type { Movie, MovieSearchResponse } from "~/types/movie";
+import type { Movie, MovieDetails, MovieSearchResponse, MovieVideo } from "~/types/movie";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -50,4 +50,18 @@ export function searchMovies(
     `/movies/search?query=${encodeURIComponent(query)}&page=${page}`,
     { cache: "no-store" },
   );
+}
+
+/** Fetch details for a single movie. */
+export function getMovieDetails(id: number): Promise<MovieDetails> {
+  return apiFetch<MovieDetails>(`/movies/${id}`, {
+    cache: "no-store",
+  });
+}
+
+/** Fetch videos associated with a movie. */
+export function getMovieVideos(id: number): Promise<MovieVideo[]> {
+  return apiFetch<MovieVideo[]>(`/movies/${id}/videos`, {
+    cache: "no-store",
+  });
 }

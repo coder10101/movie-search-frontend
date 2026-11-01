@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { tv } from "tailwind-variants";
 
 import type { Movie } from "~/types/movie";
@@ -23,31 +24,38 @@ export function MovieCard({ movie }: MovieCardProps) {
   const year = movie.releaseDate ? movie.releaseDate.slice(0, 4) : null;
 
   return (
-    <article className={base()}>
-      <div className={posterWrapper()}>
-        {movie.posterPath ? (
-          <Image
-            src={`https://image.tmdb.org/t/p/w342${movie.posterPath}`}
-            alt={movie.title}
-            fill
-            sizes="(min-width: 1024px) 200px, 45vw"
-            className="object-cover"
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center text-xs text-muted">
-            No poster
-          </div>
-        )}
-      </div>
-      <div className={body()}>
-        <h3 className={title()}>{movie.title}</h3>
-        <div className={meta()}>
-          {year && <span>{year}</span>}
-          <span aria-label={`Rated ${movie.voteAverage.toFixed(1)} out of 10`}>
-            ★ {movie.voteAverage.toFixed(1)}
-          </span>
+    <Link
+      href={`/movies/${movie.id}`}
+      className="block rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-600"
+    >
+      <article className={base()}>
+        <div className={posterWrapper()}>
+          {movie.posterPath ? (
+            <Image
+              src={`https://image.tmdb.org/t/p/w342${movie.posterPath}`}
+              alt={movie.title}
+              fill
+              sizes="(min-width: 1024px) 200px, 45vw"
+              className="object-cover"
+            />
+          ) : (
+            <div className="flex h-full items-center justify-center text-xs text-muted">
+              No poster
+            </div>
+          )}
         </div>
-      </div>
-    </article>
+        <div className={body()}>
+          <h3 className={title()}>{movie.title}</h3>
+          <div className={meta()}>
+            {year && <span>{year}</span>}
+            <span
+              aria-label={`Rated ${movie.voteAverage.toFixed(1)} out of 10`}
+            >
+              ★ {movie.voteAverage.toFixed(1)}
+            </span>
+          </div>
+        </div>
+      </article>
+    </Link>
   );
 }
