@@ -6,7 +6,14 @@
     "posterPath": "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
     "backdropPath": null,
     "voteAverage": 8.3,
-    "releaseDate": "2021-12-15"
+    "releaseDate": "2021-12-15",
+    "runtime": 148,
+    "tagline": "The Multiverse unleashed.",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Science Fiction"
+    ]
   },
   {
     "id": 2,
@@ -15,7 +22,14 @@
     "posterPath": "/74xTEgt7R36Fpooo50r9T25onhq.jpg",
     "backdropPath": null,
     "voteAverage": 8.1,
-    "releaseDate": "2022-03-01"
+    "releaseDate": "2022-03-01",
+    "runtime": 176,
+    "tagline": "Unmask the truth.",
+    "genres": [
+      "Action",
+      "Crime",
+      "Mystery"
+    ]
   },
   {
     "id": 3,
@@ -24,7 +38,10 @@
     "posterPath": "/vDHsLnOWKlPGmWs0kGfuhNF4w5l.jpg",
     "backdropPath": null,
     "voteAverage": 6.3,
-    "releaseDate": "2022-02-25"
+    "releaseDate": "2022-02-25",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 4,
@@ -33,7 +50,10 @@
     "posterPath": "/4j0PNHkMr5ax3IA8tjtxcmPU3QT.jpg",
     "backdropPath": null,
     "voteAverage": 7.7,
-    "releaseDate": "2021-11-24"
+    "releaseDate": "2021-11-24",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 5,
@@ -42,7 +62,10 @@
     "posterPath": "/aq4Pwv5Xeuvj6HZKtxyd23e6bE9.jpg",
     "backdropPath": null,
     "voteAverage": 7.0,
-    "releaseDate": "2021-12-22"
+    "releaseDate": "2021-12-22",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 6,
@@ -51,7 +74,10 @@
     "posterPath": "/pSh8MyYu5CmfyWEHzv8FEARH2zq.jpg",
     "backdropPath": null,
     "voteAverage": 6.6,
-    "releaseDate": "2022-01-07"
+    "releaseDate": "2022-01-07",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 7,
@@ -60,7 +86,10 @@
     "posterPath": "/kZNHR1upJKF3eTzdgl5V8s8a4C3.jpg",
     "backdropPath": null,
     "voteAverage": 6.8,
-    "releaseDate": "2022-01-12"
+    "releaseDate": "2022-01-12",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 8,
@@ -69,7 +98,10 @@
     "posterPath": "/okNgwtxIWzGsNlR3GsOS0i0Qgbn.jpg",
     "backdropPath": null,
     "voteAverage": 6.3,
-    "releaseDate": "2022-02-10"
+    "releaseDate": "2022-02-10",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 9,
@@ -78,7 +110,10 @@
     "posterPath": "/3cccEF9QZgV9bLWyupJO41HSrOV.jpg",
     "backdropPath": null,
     "voteAverage": 5.3,
-    "releaseDate": "2022-02-17"
+    "releaseDate": "2022-02-17",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 10,
@@ -87,7 +122,10 @@
     "posterPath": "/zByhtBvX99ZiCQhac1sh9d9r6nb.jpg",
     "backdropPath": null,
     "voteAverage": 7.2,
-    "releaseDate": "2021-11-03"
+    "releaseDate": "2021-11-03",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 11,
@@ -96,7 +134,10 @@
     "posterPath": "/fSbqPbqXa7ePo8bcnZYN9AHv6zA.jpg",
     "backdropPath": null,
     "voteAverage": 6.7,
-    "releaseDate": "2012-06-23"
+    "releaseDate": "2012-06-23",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 12,
@@ -105,7 +146,10 @@
     "posterPath": "/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg",
     "backdropPath": null,
     "voteAverage": 7.5,
-    "releaseDate": "2009-12-10"
+    "releaseDate": "2009-12-10",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 13,
@@ -114,7 +158,10 @@
     "posterPath": "/c3e9e18SSlvFd1cQaGmUj5tqL5P.jpg",
     "backdropPath": null,
     "voteAverage": 6.5,
-    "releaseDate": "2014-04-16"
+    "releaseDate": "2014-04-16",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 14,
@@ -123,7 +170,10 @@
     "posterPath": "/fTuxNlgEm04PPFkr1xfK94Jn8BW.jpg",
     "backdropPath": null,
     "voteAverage": 8.2,
-    "releaseDate": "2016-10-07"
+    "releaseDate": "2016-10-07",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 15,
@@ -132,7 +182,10 @@
     "posterPath": "/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg",
     "backdropPath": null,
     "voteAverage": 7.7,
-    "releaseDate": "2012-04-25"
+    "releaseDate": "2012-04-25",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 16,
@@ -141,7 +194,10 @@
     "posterPath": "/uGBVj3bEbCoZbDjjl9wTxcygko1.jpg",
     "backdropPath": null,
     "voteAverage": 7.4,
-    "releaseDate": "2016-10-25"
+    "releaseDate": "2016-10-25",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 17,
@@ -150,7 +206,10 @@
     "posterPath": "/soq3AxjALdBfdPAm8H7yuMmNL5Y.jpg",
     "backdropPath": null,
     "voteAverage": 6.8,
-    "releaseDate": "2015-04-18"
+    "releaseDate": "2015-04-18",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 18,
@@ -159,7 +218,10 @@
     "posterPath": "/nO9gTGDNdYnPr9ILKNQmk6EVTVR.jpg",
     "backdropPath": null,
     "voteAverage": 6.1,
-    "releaseDate": "2009-03-19"
+    "releaseDate": "2009-03-19",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 19,
@@ -168,7 +230,10 @@
     "posterPath": "/ode14q7WtDugFDp78fo9lCsmay9.jpg",
     "backdropPath": null,
     "voteAverage": 7.2,
-    "releaseDate": "2014-09-10"
+    "releaseDate": "2014-09-10",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 20,
@@ -177,7 +242,10 @@
     "posterPath": "/1k6iwC4KaPvTBt1JuaqXy3noZRY.jpg",
     "backdropPath": null,
     "voteAverage": 7.7,
-    "releaseDate": "2015-08-07"
+    "releaseDate": "2015-08-07",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 21,
@@ -186,7 +254,10 @@
     "posterPath": "/oZvMcGvyTfrFLny6i3RJONQb5C9.jpg",
     "backdropPath": null,
     "voteAverage": 5.5,
-    "releaseDate": "1986-11-04"
+    "releaseDate": "1986-11-04",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 22,
@@ -195,7 +266,10 @@
     "posterPath": "/jUhGHv4YihieVjhU2TmFaBsZ4Xg.jpg",
     "backdropPath": null,
     "voteAverage": 7.2,
-    "releaseDate": "1989-06-23"
+    "releaseDate": "1989-06-23",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 23,
@@ -204,7 +278,10 @@
     "posterPath": "/8RW2runSEc34IwKN2D1aPcJd2UL.jpg",
     "backdropPath": null,
     "voteAverage": 7.7,
-    "releaseDate": "2005-06-10"
+    "releaseDate": "2005-06-10",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 24,
@@ -213,7 +290,10 @@
     "posterPath": "/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg",
     "backdropPath": null,
     "voteAverage": 7.9,
-    "releaseDate": "2001-11-16"
+    "releaseDate": "2001-11-16",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 25,
@@ -222,7 +302,10 @@
     "posterPath": "/sdEOH0992YZ0QSxgXNIGLq1ToUi.jpg",
     "backdropPath": null,
     "voteAverage": 7.7,
-    "releaseDate": "2002-11-13"
+    "releaseDate": "2002-11-13",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 26,
@@ -231,7 +314,10 @@
     "posterPath": "/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg",
     "backdropPath": null,
     "voteAverage": 7.2,
-    "releaseDate": "2002-05-01"
+    "releaseDate": "2002-05-01",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 27,
@@ -240,7 +326,10 @@
     "posterPath": "/iPDkaSdKk2jRLTM65UOEoKtsIZ8.jpg",
     "backdropPath": null,
     "voteAverage": 7.2,
-    "releaseDate": "2007-12-12"
+    "releaseDate": "2007-12-12",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 28,
@@ -249,7 +338,10 @@
     "posterPath": "/vDkct38sSFSWJIATlfJw0l3QOIR.jpg",
     "backdropPath": null,
     "voteAverage": 7.2,
-    "releaseDate": "2007-08-04"
+    "releaseDate": "2007-08-04",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 29,
@@ -258,7 +350,10 @@
     "posterPath": "/fECBtHlr0RB3foNHDiCBXeg9Bv9.jpg",
     "backdropPath": null,
     "voteAverage": 7.8,
-    "releaseDate": "2005-11-16"
+    "releaseDate": "2005-11-16",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   },
   {
     "id": 30,
@@ -267,6 +362,9 @@
     "posterPath": "/aWxwnYoe8p2d2fcxOqtvAtJ72Rw.jpg",
     "backdropPath": null,
     "voteAverage": 8.0,
-    "releaseDate": "2004-05-31"
+    "releaseDate": "2004-05-31",
+    "runtime": null,
+    "tagline": null,
+    "genres": []
   }
 ]
