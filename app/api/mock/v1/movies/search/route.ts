@@ -1,11 +1,14 @@
 import { trendingMovies } from "~/lib/mock/movies";
 
+const PAGE_SIZE = 10;
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
   const query = searchParams.get("query")?.trim() ?? "";
+  const page = Number(searchParams.get("page") ?? "1");
 
-  if (!query) {
+  if (!query || !Number.isInteger(page) || page < 1) {
     return Response.json(
       {
         type: "about:blank",
@@ -26,7 +29,14 @@ export async function GET(request: Request) {
       .includes(query.toLowerCase()),
   );
 
+  const totalResults = matches.length;
+  const totalPages = Math.ceil(totalResults / PAGE_SIZE);
+  const results = matches.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
   return Response.json({
-    results: matches,
+    page,
+    totalPages,
+    totalResults,
+    results,
   });
 }
