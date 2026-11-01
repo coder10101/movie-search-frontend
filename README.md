@@ -31,12 +31,12 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ### Available commands
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start development server |
-| `npm run lint` | Run ESLint |
+| Command            | Description               |
+| ------------------ | ------------------------- |
+| `npm run dev`      | Start development server  |
+| `npm run lint`     | Run ESLint                |
 | `npx tsc --noEmit` | Run TypeScript validation |
-| `npm run build` | Create production build |
+| `npm run build`    | Create production build   |
 
 ## 2. Project Architecture
 
@@ -62,10 +62,10 @@ Returns a list of movies using the shared `Movie` data structure.
 
 `GET /movies/search?query=batman&page=1`
 
-| Parameter | Description |
-|---|---|
-| `query` | Required, non-empty search term |
-| `page` | Optional page number; defaults to 1 and must be between 1 and 500 |
+| Parameter | Description                                                       |
+| --------- | ----------------------------------------------------------------- |
+| `query`   | Required, non-empty search term                                   |
+| `page`    | Optional page number; defaults to 1 and must be between 1 and 500 |
 
 Search responses contain:
 
@@ -77,16 +77,18 @@ interface MovieSearchResponse {
   results: Movie[];
 }
 ```
+
 ### Movie detail
+
 `GET /movies/{id}`
 
 Returns the base movie information along with runtime, tagline and genres. Returns 404 when the movie is not found.
 
 ### Movie Video
+
 `GET /movies/{id}/videos`
 
 Returns available video records, including YouTube trailer information. Returns an empty array when no videos are available.
-
 
 The API owns pagination metadata. The frontend uses the returned values to render results and navigate between pages.
 
@@ -105,15 +107,15 @@ It uses a fixed local movie fixture dataset and follows the expected API respons
 
 ### Scenarios
 
-| Trigger | Behaviour | What it tests |
-|---|---|---|
-| `batman` | Returns matching movies | Normal search |
-| `a` | Returns 30 matching results across 3 pages | Pagination |
-| `noresults` | Returns HTTP 200 with an empty result list | Empty state |
-| `slow` | Delays the response by approximately 3 seconds | Loading state |
-| `error` | Returns HTTP 503 | API error handling |
-| Empty query | Returns HTTP 400 | Query validation |
-| `query=a&page=4` | Returns HTTP 400 | Page validation |
+| Trigger          | Behaviour                                      | What it tests      |
+| ---------------- | ---------------------------------------------- | ------------------ |
+| `batman`         | Returns matching movies                        | Normal search      |
+| `a`              | Returns 30 matching results across 3 pages     | Pagination         |
+| `noresults`      | Returns HTTP 200 with an empty result list     | Empty state        |
+| `slow`           | Delays the response by approximately 3 seconds | Loading state      |
+| `error`          | Returns HTTP 503                               | API error handling |
+| Empty query      | Returns HTTP 400                               | Query validation   |
+| `query=a&page=4` | Returns HTTP 400                               | Page validation    |
 
 The special values are reserved testing triggers within the mock implementation. They do not represent production search behaviour.
 
@@ -123,7 +125,6 @@ The special values are reserved testing triggers within the mock implementation.
 - Allows different API states to be tested without external dependencies.
 - Validates the frontend against the expected backend contract.
 - Keeps mock-specific logic isolated from the application UI.
-
 
 ## 5. Backend Integration
 
@@ -153,7 +154,6 @@ The frontend expects the backend to provide:
 The API client is responsible for HTTP communication, so the UI does not need to know whether its data comes from the mock or the actual backend.
 
 The current API requests are made from the Next.js server. Therefore, the backend must be reachable from the Next.js server; browser-side CORS configuration is not required for these server-to-server requests.
-
 
 ## 6. Implementation Summary
 

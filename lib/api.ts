@@ -1,6 +1,11 @@
 import "server-only";
 
-import type { Movie, MovieDetails, MovieSearchResponse, MovieVideo } from "~/types/movie";
+import type {
+  Movie,
+  MovieDetails,
+  MovieSearchResponse,
+  MovieVideo,
+} from "~/types/movie";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 

@@ -9,11 +9,7 @@
     "releaseDate": "2021-12-15",
     "runtime": 148,
     "tagline": "The Multiverse unleashed.",
-    "genres": [
-      "Action",
-      "Adventure",
-      "Science Fiction"
-    ]
+    "genres": ["Action", "Adventure", "Science Fiction"]
   },
   {
     "id": 2,
@@ -25,11 +21,7 @@
     "releaseDate": "2022-03-01",
     "runtime": 176,
     "tagline": "Unmask the truth.",
-    "genres": [
-      "Action",
-      "Crime",
-      "Mystery"
-    ]
+    "genres": ["Action", "Crime", "Mystery"]
   },
   {
     "id": 3,
