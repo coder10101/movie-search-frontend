@@ -2,7 +2,7 @@
 
 A movie discovery and search application built with Next.js 16, React 19, TypeScript, and Tailwind CSS 4.
 
-The application provides trending movies, movie search, and server-driven pagination.
+The application provides trending movies, movie search, and server-driven pagination. It also includes individual movie detail pages with additional metadata and YouTube trailer integration.
 
 ## 1. Getting Started
 
@@ -50,7 +50,7 @@ The application separates UI rendering, API communication, mock implementation, 
 
 ## 3. API Contract
 
-The frontend consumes two endpoints.
+The frontend consumes four endpoints.
 
 ### Trending movies
 
@@ -77,6 +77,16 @@ interface MovieSearchResponse {
   results: Movie[];
 }
 ```
+### Movie detail
+`GET /movies/{id}`
+
+Returns the base movie information along with runtime, tagline and genres. Returns 404 when the movie is not found.
+
+### Movie Video
+`GET /movies/{id}/videos`
+
+Returns available video records, including YouTube trailer information. Returns an empty array when no videos are available.
+
 
 The API owns pagination metadata. The frontend uses the returned values to render results and navigate between pages.
 
@@ -87,6 +97,9 @@ API errors use the `application/problem+json` response format.
 The mock API is implemented using Next.js Route Handlers under:
 
 `app/api/mock/v1/movies/`
+
+`movies.json`: Contains the movie dataset and additional detail metadata.
+`movie-videos.json`: Contains video fixtures mapped to their corresponding movie IDs.
 
 It uses a fixed local movie fixture dataset and follows the expected API response structure. This allows frontend development and testing without depending on the availability of the actual backend.
 
@@ -111,29 +124,8 @@ The special values are reserved testing triggers within the mock implementation.
 - Validates the frontend against the expected backend contract.
 - Keeps mock-specific logic isolated from the application UI.
 
-## 5. Rendering Strategy
 
-The application uses a combination of Next.js Server Components and Client Components.
-
-### Server Components
-
-The home page (`app/page.tsx`) is a Server Component.
-
-It reads the URL search parameters, requests trending movies or search results through the API client, and renders the response.
-
-### Client Components
-
-The search bar is a Client Component because it handles browser interactions and input changes.
-
-Search submission uses a native GET form, which updates the URL and allows the server-rendered page to fetch the corresponding results.
-
-### Loading and error states
-
-- `app/loading.tsx` provides loading feedback during route rendering.
-- `app/error.tsx` provides a route-level error fallback.
-- Empty search results are handled separately from API failures.
-
-## 6. Backend Integration
+## 5. Backend Integration
 
 The mock API and actual backend share the same intended API.
 
@@ -163,7 +155,7 @@ The API client is responsible for HTTP communication, so the UI does not need to
 The current API requests are made from the Next.js server. Therefore, the backend must be reachable from the Next.js server; browser-side CORS configuration is not required for these server-to-server requests.
 
 
-## 7. Implementation Summary
+## 6. Implementation Summary
 
 ### What I Prioritized
 
@@ -171,13 +163,14 @@ The main focus was implementing the core movie search experience while maintaini
 
 ### What I Deferred
 
-- **P2:** Movie detail pages and YouTube trailer integration were deferred to prioritize the core search and pagination requirements.
-- **P3:** TV/series search and additional performance optimizations were skipped because they were stretch enhancements rather than essential functionality.
+- **P3:** TV/Series Search and Additional Performance Optimizations: Deferred due to personal time constraints and the assessment deadline. I prioritized completing the core movie search experience and the additional movie detail and trailer functionality within the available time.
 
 ### Rendering Strategy
-Retained the existing Next.js rendering architecture:
 
-- **Server Component:** The home page fetches search data on the server and renders the results.
-- **Client Component:** The search bar handles browser-side input interactions and submits searches through a native GET form.
+The application uses Next.js Server Components for data-driven pages and Client Components only where browser interaction is required.
 
-This approach keeps data fetching on the server while limiting client-side JavaScript to interactive functionality.
+- **Home page (`app/page.tsx`):** A Server Component that reads URL search parameters, fetches trending movies or search results, and renders the movie grid.
+- **Movie detail page (`app/movies/[id]/page.tsx`):** A Server Component that fetches movie details and video information in parallel. It renders the movie metadata and embeds the YouTube trailer when an available trailer exists. Invalid IDs and API 404 responses are handled using Next.js.
+- **Search bar:** A Client Component that handles user input and submits searches through a native GET form, updating the URL search parameters.
+
+This approach keeps data fetching and page rendering on the server, reduces unnecessary client-side JavaScript, and uses client-side interactivity only where needed.
