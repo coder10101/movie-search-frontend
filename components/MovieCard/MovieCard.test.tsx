@@ -16,6 +16,7 @@ describe("MovieCard", () => {
           voteAverage: 8.1,
           releaseDate: "2024-05-01",
         }}
+        returnTo="/"
       />,
     );
 
